@@ -7,14 +7,14 @@ const cors = require('cors');
 
 const PORT = process.env.PORT || 5000;
 
-// const router = require('./router');
+const router = require('./router');
 
 // instantiate sock.io server
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-//app.use(router); 
+app.use(router); 
 app.use(cors());
 
 server.listen(PORT, () => console.log(`server has started on port ${PORT}`));
