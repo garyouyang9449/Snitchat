@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Rooms = () => {
     const [school, setSchool] = useState(''); 
-
+    
     return (
         <div>
             <div><input placeholder="School Name..." className="joinInput" type="text" onChange={(event) => setSchool(event.target.value)} /></div>
