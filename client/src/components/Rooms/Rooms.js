@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom';
 
 const Rooms = () => {
     const [school, setSchool] = useState(''); 
-    
+
     return (
         <div>
-            <div><input placeholder="School Name..." className="joinInput" type="text" onChange={(event) => setSchool(event.target.value)} /></div>
-            <Link onClick={event => (!school) ? event.preventDefault : null} to={`/chat?school=${school}`}>
-                <button className="button mt-20" type="submit">Join</button>
+            <Link onClick={event => (!school) ? event.preventDefault : null} to={`/chat?school=UCScamDiego`}>
+                <button className="button mt-20" type="submit">UC Scam Diego</button>
+            </Link>
+            <Link onClick={event => (!school) ? event.preventDefault : null} to={`/chat?school=UCShatterDreams`}>
+                <button className="button mt-20" type="submit">UC Shatter Dreams</button>
             </Link>
         </div>
         
