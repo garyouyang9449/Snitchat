@@ -37,4 +37,10 @@ const removeUser = (id) => {
     }
 }
 
+/**
+ * Finds an existing user
+ * @param {*} id 
+ */
+const getUser = (id) => users.find((user) => user.id === id);
+
 module.exports = {addUser, removeUser};
