@@ -5,24 +5,26 @@
 const users = [];
 
 /**
- * Add to existing users when a new user joins the chat room
+ * Add to existing users when a new user joins the school-spcific chat room
  * @param id A unique socket id
  * @param user The randomly assigned user name
- * @param school A school-specific chat room
+ * @param school A school-specific school-specific chat room
  * 
- * @return void if successfully added a new user, else false
+ * @return void if successfully added a new user, else error
  */
 const addUser = ({id, name, school}) => {
     // check if a user with the same name exists in a school-specific chat room
     const existingUser = users.find((user) => user.name === name && user.school === school);
     
     if(existingUser) {
-        return false;
+        return {error: 'Uesr name already exists'};
     }
 
     const user = {id, name, school};
 
     users.push(user);
+
+    return {user};
 }
 
 /**
@@ -43,4 +45,10 @@ const removeUser = (id) => {
  */
 const getUser = (id) => users.find((user) => user.id === id);
 
-module.exports = {addUser, removeUser};
+/**
+ * Get all the existing users in a school-specific chat room
+ * @param {*} school a school-specific chat room
+ */
+const getUsersInSchool = (school) => users.filter((user) => user.school === school);
+
+module.exports = { addUser, removeUser, getUser, getUsersInSchool };
