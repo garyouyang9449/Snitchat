@@ -3,7 +3,7 @@ const socketio = require('socket.io');
 const http = require('http');
 const cors = require('cors');
 
-// const { addUesr, removeUser, getUser, getUsersInRoom } = require('./users.js');
+const { addUesr } = require('./users.js');
 
 const PORT = process.env.PORT || 5000;
 
@@ -24,8 +24,8 @@ app.use(cors());
 io.on('connection', (socket) => {
 
     // when a user joins
-    socket.on('join', ({ school }) => {
-        
+    socket.on('join', ({ school, name}) => {
+        const { error, user } = addUesr({ id: socket.id, name, school });
     });
 
     socket.on('disconnect', () => {
