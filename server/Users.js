@@ -14,7 +14,7 @@ const users = [];
  */
 const addUser = ({id, name, school}) => {
     // check if a user with the same name exists in a school-specific chat room
-    const existingUser = users.find((user) => user.name == name && user.school == school);
+    const existingUser = users.find((user) => user.name === name && user.school === school);
     
     if(existingUser) {
         return false;
@@ -25,4 +25,16 @@ const addUser = ({id, name, school}) => {
     users.push(user);
 }
 
-module.exports = {addUser};
+/**
+ * Remove an existing user in the room when that user leaves
+ * @param {*} id The unique id that identifies the user
+ */
+const removeUser = (id) => {
+    const index = users.findIndex((user) => user.id === id);
+
+    if(index !== -1) {
+        return users.splice(index, 1)[0];
+    }
+}
+
+module.exports = {addUser, removeUser};
