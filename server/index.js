@@ -22,7 +22,7 @@ app.use(router);
 app.use(cors());
 
 io.on('connection', (socket) => {
-    // when a user joins
+    // when a user joins, emit a message to the backend server
     socket.on('join', ({ school, name }, callback) => {
         const { user } = addUser({ id: socket.id, school, name }); // addUser will not return error
 
@@ -36,6 +36,7 @@ io.on('connection', (socket) => {
         return callback(user.name);
     });
 
+    // when a user send a message
     socket.on('sendMessage', (message, callback) => {
         const user = getUser(socket.id);
         io.to(user.school).emit('message', { user: user.name, text: message });
@@ -44,6 +45,7 @@ io.on('connection', (socket) => {
         callback();
     });
 
+    // when a user leaves the chatroom
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
         // a user has left the chat room

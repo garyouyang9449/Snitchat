@@ -5,14 +5,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 /**
- * Generate a random user name to support anonymity
- */
-const RandomName = () => {
-
-}
-
-
-/**
  * The main structure of the web app. The root is the display of a list of rooms.
  */
 const Rooms = () => {

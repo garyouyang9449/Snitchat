@@ -1,3 +1,6 @@
+/**
+ * This file defines the main structure of the chatroom
+ */
 import React, { useState, useEffect } from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
@@ -7,8 +10,8 @@ import InfoBar from '../InfoBar/InfoBar.js';
 import Input from '../Input/Input.js';
 import Messages from '../Messages/Messages';
 
+// Create connection to the backend server
 let socket;
-
 const ENDPOINT = 'localhost:5000';
 socket = io(ENDPOINT);
 
@@ -23,20 +26,17 @@ const Chat = ({ location }) => {
     const [message, setMessage] = useState(''); // a single message
 
     useEffect(() => {
-        const { school } = queryString.parse(location.search);
-
+        const { school } = queryString.parse(location.search); // get the school name of the chat room
         setSchool(school);
 
         socket.emit('join', { school, name }, (newName) => {
             setName(name+newName);
-        }); // need a callback function to set the name to the randomly generated name
+        }); 
 
-        
         return () => {
             socket.emit('disconnect');
             socket.off();
         };
-        
     }, [ENDPOINT, location.search]); // on endpoint and URL location change
 
     useEffect(() => {
@@ -46,8 +46,7 @@ const Chat = ({ location }) => {
     }, [messages]);
 
     const sendMessage = (event) => {
-        // check if user types a empty message
-        event.preventDefault();
+        event.preventDefault(); // prevent the user from entering an empty message
 
         if(message) {
             socket.emit('sendMessage', message, () => {
@@ -55,7 +54,7 @@ const Chat = ({ location }) => {
             });
         }
     }
-    console.log(`after set name: ${name}`);
+
     return (
         <div className="outerContainer">
             <div className="container">
