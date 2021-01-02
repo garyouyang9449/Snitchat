@@ -23,14 +23,14 @@ const Chat = ({ location }) => {
     const [message, setMessage] = useState(''); // a single message
 
     useEffect(() => {
-        let { school } = queryString.parse(location.search);
+        const { school } = queryString.parse(location.search);
 
         setSchool(school);
-        
-        socket.emit('join', { school, name });
 
-        setName(name);
-        console.log(name);
+        socket.emit('join', { school, name }, (newName) => {
+            setName(name+newName);
+        }); // need a callback function to set the name to the randomly generated name
+
         
         return () => {
             socket.emit('disconnect');
@@ -55,7 +55,7 @@ const Chat = ({ location }) => {
             });
         }
     }
-
+    console.log(`after set name: ${name}`);
     return (
         <div className="outerContainer">
             <div className="container">

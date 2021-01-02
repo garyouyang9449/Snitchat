@@ -22,9 +22,8 @@ app.use(router);
 app.use(cors());
 
 io.on('connection', (socket) => {
-
     // when a user joins
-    socket.on('join', ({ school, name }) => {
+    socket.on('join', ({ school, name }, callback) => {
         const { user } = addUser({ id: socket.id, school, name }); // addUser will not return error
 
         socket.emit('message', {user: 'admin', text: `${user.name} welcome to ${user.school} chat room`});
@@ -32,7 +31,9 @@ io.on('connection', (socket) => {
 
         socket.join(user.school);
 
-        io.to(user.school).emit('schoolData', { school: user.school, users: getUsersInSchool(user.school) })
+        io.to(user.school).emit('schoolData', { school: user.school, users: getUsersInSchool(user.school) });
+        
+        return callback(user.name);
     });
 
     socket.on('sendMessage', (message, callback) => {
