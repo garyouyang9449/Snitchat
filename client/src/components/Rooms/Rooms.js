@@ -17,7 +17,6 @@ const RandomName = () => {
  * The main structure of the web app. The root is the display of a list of rooms.
  */
 const Rooms = () => {
-    const [school, setSchool] = useState(''); 
 
     // can not generate a existed name in the chat room
     const name = "User" + Math.floor(Math.random() * 10);
