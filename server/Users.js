@@ -48,6 +48,8 @@ const getUser = (id) => users.find((user) => user.id === id);
 /**
  * Get all the existing users in a school-specific chat room
  * @param {*} school a school-specific chat room
+ * 
+ * @return a array of users in a school chat room
  */
 const getUsersInSchool = (school) => users.filter((user) => user.school === school);
 

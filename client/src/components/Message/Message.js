@@ -9,10 +9,9 @@ const Message = ({ message: { user, text }, name }) => {
 
   const trimmedName = name.trim().toLowerCase();
 
-  if(user === trimmedName) {
+  if(user === name) {
     isSentByCurrentUser = true;
   }
-
   return (
     isSentByCurrentUser
       ? (

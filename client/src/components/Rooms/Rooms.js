@@ -4,11 +4,24 @@ This file is the Join page, where the users enter their and will be redirected t
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+
+/**
+ * Generate a random user name to support anonymity
+ */
+const RandomName = () => {
+
+}
+
+
+/**
+ * The main structure of the web app. The root is the display of a list of rooms.
+ */
 const Rooms = () => {
     const [school, setSchool] = useState(''); 
 
     // can not generate a existed name in the chat room
     const name = "User" + Math.floor(Math.random() * 10);
+    // const name = "User" + Math.floor(Math.random());
 
     return (
         <div>

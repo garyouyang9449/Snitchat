@@ -28,8 +28,11 @@ const Chat = ({ location }) => {
         setSchool(school);
         setName(name);
 
-        socket.emit('join', { school, name }, () => {
-
+        socket.emit('join', { school, name }, (error) => {
+            if(error) {
+                //regenerate a new name
+                
+            }
         });
 
         return () => {
@@ -37,7 +40,7 @@ const Chat = ({ location }) => {
             socket.off();
         };
         
-    }, [ENDPOINT, location.search]);
+    }, [ENDPOINT, location.search]); // on endpoint and URL location change
 
     useEffect(() => {
         socket.on('message', (message) => {

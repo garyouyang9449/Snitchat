@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
         if(error) {
             return callback(error);
         }
-
+        
         socket.emit('message', {user: 'admin', text: `${user.name} welcome to ${user.school} chat room`});
         socket.broadcast.to(user.school).emit('message', {user: 'admin', text: `${user.name} has entered the chat room`});
 
