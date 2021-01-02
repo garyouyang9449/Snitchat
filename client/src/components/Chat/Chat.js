@@ -25,20 +25,10 @@ const Chat = ({ location }) => {
     useEffect(() => {
         let { school } = queryString.parse(location.search);
 
-        /*************************************** */
-        name = "User" + Math.floor(Math.random()); //assign the user an initial rnadom name, this needs to include a bigger user name base
-        /*************************************** */
-
-
         setSchool(school);
         setName(name);
 
-        socket.emit('join', { school, name }, (error) => {
-            if(error) {
-                //regenerate a new name
-                
-            }
-        });
+        socket.emit('join', { school, name });
 
         return () => {
             socket.emit('disconnect');
