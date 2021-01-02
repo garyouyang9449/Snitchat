@@ -24,7 +24,7 @@ const addUser = ({id, name, school}) => {
     while(existingUser) {
         
         /*************************************** */
-        name = "User" + Math.floor(Math.random() * 10); // this needs to include a bigger user name base
+        name = "User" + Math.floor(Math.random() * 10); // this needs to include a bigger user name base, UUID
         /*************************************** */
 
         existingUser = users.find((user) => user.name === name && user.school === school);

@@ -26,10 +26,12 @@ const Chat = ({ location }) => {
         let { school } = queryString.parse(location.search);
 
         setSchool(school);
-        setName(name);
-
+        
         socket.emit('join', { school, name });
 
+        setName(name);
+        console.log(name);
+        
         return () => {
             socket.emit('disconnect');
             socket.off();
@@ -53,8 +55,6 @@ const Chat = ({ location }) => {
             });
         }
     }
-
-    console.log(messages, message);
 
     return (
         <div className="outerContainer">
