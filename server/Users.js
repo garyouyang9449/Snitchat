@@ -14,10 +14,22 @@ const users = [];
  */
 const addUser = ({id, name, school}) => {
     // check if a user with the same name exists in a school-specific chat room
-    const existingUser = users.find((user) => user.name === name && user.school === school);
+    // const existingUser = users.find((user) => user.name === name && user.school === school);
+    let existingUser = users.find((user) => user.name === name && user.school === school);
     
+    /*
     if(existingUser) {
         return {error: 'Uesr name already exists'};
+    }
+    */
+
+    while(existingUser) {
+        
+        /*************************************** */
+        name = "User" + Math.floor(Math.random() * 10); // this needs to include a bigger user name base
+        /*************************************** */
+
+        existingUser = users.find((user) => user.name === name && user.school === school);
     }
 
     const user = {id, name, school};

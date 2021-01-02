@@ -18,12 +18,17 @@ socket = io(ENDPOINT);
  */
 const Chat = ({ location }) => {
     const [school, setSchool] = useState(''); // set school to default ''
-    const [name, setName] = useState(''); 
+    let [name, setName] = useState(''); 
     const [messages, setMessages] = useState([]); // an array of message
     const [message, setMessage] = useState(''); // a single message
 
     useEffect(() => {
-        const { school, name } = queryString.parse(location.search); // location.search: the url parameters
+        let { school } = queryString.parse(location.search);
+
+        /*************************************** */
+        name = "User" + Math.floor(Math.random()); //assign the user an initial rnadom name, this needs to include a bigger user name base
+        /*************************************** */
+
 
         setSchool(school);
         setName(name);

@@ -25,12 +25,15 @@ io.on('connection', (socket) => {
 
     // when a user joins
     socket.on('join', ({ school, name }, callback) => {
-        const { error, user } = addUser({ id: socket.id, school, name });
+        const { error, user } = addUser({ id: socket.id, school, name }); // addUser will not return error
 
-        if(error) {
+        /**
+         * can remove the below if statement
+         */
+        if(error) { 
             return callback(error);
         }
-        
+
         socket.emit('message', {user: 'admin', text: `${user.name} welcome to ${user.school} chat room`});
         socket.broadcast.to(user.school).emit('message', {user: 'admin', text: `${user.name} has entered the chat room`});
 
